@@ -1,0 +1,217 @@
+mh-header,
+mh-sidebar,
+mh-album-3d {
+  display: block;
+}
+
+.topbar {
+  width: 1200px;
+  max-width: calc(100% - 32px);
+  margin: 30px auto 0;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.topbar__logo img {
+  width: 102px;
+  height: 40px;
+  filter: brightness(0) invert(1);
+}
+
+.search {
+  position: relative;
+  width: 500px;
+  height: 40px;
+  border-radius: 24px;
+  background: var(--glass-tint, var(--glass-bg));
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-edge);
+}
+
+.search__icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  transform: translateY(-50%);
+}
+
+.search__input {
+  width: 100%;
+  height: 100%;
+  padding: 0 20px 0 60px;
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  outline: none;
+}
+
+.search__input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.topbar__avatar {
+  justify-self: end;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--glass-tint, var(--glass-bg));
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-edge);
+}
+
+.topbar__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sidebar {
+  position: fixed;
+  left: 30px;
+  top: 50%;
+  z-index: 10;
+  transform: translateY(-50%);
+  width: 60px;
+  padding: 5px 5px 14px;
+  border-radius: 29px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--sidebar-bg, var(--glass-bg));
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--glass-edge);
+}
+
+.sidebar__item {
+  width: 50px;
+  height: 73px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.sidebar__item--active {
+  height: 80px;
+  background: var(--sidebar-active, var(--glass-bg));
+  box-shadow: var(--glass-edge);
+}
+
+.sidebar__item:not(.sidebar__item--active):hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.sidebar__icon {
+  width: 30px;
+  height: 27px;
+}
+
+.sidebar__icon--home {
+  width: 28px;
+  height: 30px;
+}
+
+mh-album-3d {
+  --tamanho: 500px;
+  --espessura: 26px;
+  --giro-x: -5deg;
+  --giro-y: 24deg;
+  width: var(--tamanho);
+  height: var(--tamanho);
+  perspective: 1600px;
+}
+
+.album3d {
+  scale: 0.9;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transform:
+    rotateX(calc(var(--giro-x) + var(--mouse-x, 0deg)))
+    rotateY(calc(var(--giro-y) + var(--mouse-y, 0deg)));
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.album3d__face {
+  position: absolute;
+  backface-visibility: hidden;
+  background-image: var(--capa);
+  background-size: var(--tamanho) var(--tamanho);
+}
+
+.album3d__frente {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  transform: translateZ(calc(var(--espessura) / 2));
+  box-shadow:
+    -219px 193px 82px 0 rgba(0, 0, 0, 0),
+    -140px 123px 75px 0 rgba(0, 0, 0, 0.01),
+    -79px 69px 63px 0 rgba(0, 0, 0, 0.05),
+    -35px 31px 47px 0 rgba(0, 0, 0, 0.09),
+    -9px 8px 26px 0 rgba(0, 0, 0, 0.1);
+}
+
+.album3d__tras {
+  inset: 0;
+  border-radius: 4px;
+  filter: brightness(0.35);
+  transform: rotateY(180deg) translateZ(calc(var(--espessura) / 2));
+}
+
+.album3d__esquerda,
+.album3d__direita {
+  top: 0;
+  left: calc(50% - var(--espessura) / 2);
+  width: var(--espessura);
+  height: 100%;
+}
+
+.album3d__esquerda {
+  background-position: left center;
+  filter: brightness(0.65);
+  transform: rotateY(-90deg) translateZ(calc(var(--tamanho) / 2));
+}
+
+.album3d__direita {
+  background-position: right center;
+  filter: brightness(0.55);
+  transform: rotateY(90deg) translateZ(calc(var(--tamanho) / 2));
+}
+
+.album3d__topo,
+.album3d__base {
+  left: 0;
+  top: calc(50% - var(--espessura) / 2);
+  width: 100%;
+  height: var(--espessura);
+}
+
+.album3d__topo {
+  background-position: center top;
+  filter: brightness(1.1);
+  transform: rotateX(90deg) translateZ(calc(var(--tamanho) / 2));
+}
+
+.album3d__base {
+  background-position: center bottom;
+  filter: brightness(0.6);
+  transform: rotateX(-90deg) translateZ(calc(var(--tamanho) / 2));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .album3d {
+    transition: none;
+  }
+}

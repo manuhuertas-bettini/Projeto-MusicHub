@@ -1,0 +1,264 @@
+:root {
+  --accent: #a90b18;
+
+  --accent-safe: oklch(from var(--accent) clamp(0.32, l, 0.5) min(c, 0.2) h);
+
+  --color-card: var(--accent-safe);
+  --color-row-active: color-mix(in srgb, var(--accent-safe) 88%, black);
+  --color-bg: color-mix(in srgb, var(--accent-safe) 68%, black);
+  --color-accent-light: oklch(from var(--accent-safe) calc(l + 0.09) c h);
+
+  --sidebar-bg: color-mix(in srgb, var(--accent-safe) 45%, transparent);
+  --sidebar-active: color-mix(in srgb, var(--color-accent-light) 55%, transparent);
+
+  --content-width: 998px;
+  --radius-card: 24px;
+}
+
+body {
+  background-color: var(--color-bg);
+  padding-bottom: 60px;
+}
+
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent),
+    url("../assets/artista/bg-textura.png") top left,
+    var(--color-bg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: normal, multiply, normal;
+}
+
+.artist {
+  position: relative;
+  width: var(--content-width);
+  margin: 70px auto 0;
+  display: grid;
+  grid-template-columns: 386px 562px;
+  column-gap: 50px;
+  row-gap: 30px;
+}
+
+.artist::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 998px;
+  height: 813px;
+  z-index: -1;
+  background: radial-gradient(
+    571px 465.5px at 499px 406.5px,
+    var(--color-bg) 27.4%,
+    var(--color-accent-light) 100%
+  );
+  -webkit-mask: url("../assets/artista/union.svg") top left / 998px 813px no-repeat;
+  mask: url("../assets/artista/union.svg") top left / 998px 813px no-repeat;
+}
+
+.artist-banner {
+  grid-column: 1 / -1;
+  position: relative;
+  height: 333px;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.artist-banner__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artist-banner__name {
+  position: absolute;
+  left: 21px;
+  top: 258px;
+  font-size: 48.3px;
+  font-weight: 900;
+  line-height: normal;
+}
+
+.artist-banner__actions {
+  position: absolute;
+  left: 850px;
+  top: 272px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-play img {
+  width: 40px;
+  height: 40px;
+}
+
+.btn-seguir {
+  padding: 10px 14px;
+  border: 1px solid var(--color-white);
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: normal;
+  transition: background 0.2s;
+}
+
+.btn-seguir:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.artist-col {
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+}
+
+.card {
+  position: relative;
+  padding: 20px;
+  border-radius: var(--radius-card);
+  background: var(--color-card);
+}
+
+.card__title {
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 29px;
+}
+
+.card--sobre {
+  height: 244px;
+}
+
+.sobre__text {
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: normal;
+  text-align: justify;
+}
+
+.sobre__text strong {
+  font-weight: 900;
+}
+
+.card--lancamento {
+  height: 164px;
+}
+
+.album {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.album__cover {
+  width: 75px;
+  height: 75px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.album__info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.album__name {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.album__meta {
+  font-size: 14px;
+  color: var(--color-text-soft);
+}
+
+.card--populares {
+  height: 450px;
+}
+
+.song-list {
+  list-style: none;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.song {
+  height: 60px;
+  padding: 5px 23px 5px 0;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 40px 50px 1fr auto;
+  column-gap: 10px;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.song--active,
+.song:hover {
+  background: var(--color-row-active);
+}
+
+.song__pos {
+  padding-left: 19px;
+  font-size: 20px;
+  color: var(--color-text-soft);
+}
+
+.song__cover {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.song__info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.song__name {
+  font-size: 15px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 230px;
+}
+
+.song__artist {
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+.song__time {
+  font-size: 12px;
+  opacity: 0.5;
+  padding-top: 16px;
+}
+
+.card__more {
+  position: absolute;
+  left: 37px;
+  bottom: 25px;
+  font-size: 14px;
+  color: var(--color-text-soft);
+}
+
+.card__more:hover {
+  text-decoration: underline;
+}

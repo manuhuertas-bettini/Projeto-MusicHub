@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Weeknd | MusicHub</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="../shared/componentes.css">
+  <link rel="stylesheet" href="artista.css">
+
+  <script src="../shared/componentes.js"></script>
+  <script src="../shared/cor-imagem.js" defer></script>
+</head>
+<body class="artista-page">
+
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <mh-header avatar="../assets/shared/avatar.png"></mh-header>
+
+  <mh-sidebar ativo="home"></mh-sidebar>
+
+  <main class="artist">
+
+    <section class="artist-banner">
+      <img class="artist-banner__img" src="../assets/artista/banner.png" alt="" data-cor-dinamica data-saturacao-minima="0.75">
+      <h1 class="artist-banner__name" id="artist-name">The Weeknd</h1>
+
+      <div class="artist-banner__actions">
+        <button class="btn-play" type="button" id="btn-play" aria-label="Tocar">
+          <img src="../assets/artista/icon-play.svg" alt="" width="40" height="40">
+        </button>
+        <button class="btn-seguir" type="button" id="btn-seguir">Seguir</button>
+      </div>
+    </section>
+
+    <div class="artist-col">
+      <section class="card card--sobre">
+        <h2 class="card__title">Sobre</h2>
+        <p class="sobre__text" id="artist-bio">
+          <strong>The Weeknd</strong>, cujo nome verdadeiro é Abel Tesfaye, nasceu em 16 de fevereiro
+          de 1990 em Toronto, no Canadá. Ele é um famoso cantor, compositor e produtor que mistura
+          ritmos de R&amp;B, pop e música eletrônica. O artista se tornou um dos maiores nomes da música
+          no mundo com seu estilo único e voz marcante.
+        </p>
+      </section>
+
+      <section class="card card--lancamento">
+        <h2 class="card__title">Último lançamento</h2>
+        <a class="album" href="#" id="ultimo-lancamento">
+          <img class="album__cover" src="../assets/artista/album-hurry-up.png" alt="" width="75" height="75">
+          <div class="album__info">
+            <span class="album__name">Hurry Up Tomorrow</span>
+            <span class="album__meta">2025•22 músicas, 1h 24min</span>
+          </div>
+        </a>
+      </section>
+    </div>
+
+    <section class="card card--populares">
+      <h2 class="card__title">Populares</h2>
+
+      <ol class="song-list" id="song-list">
+        <li class="song song--active">
+          <span class="song__pos">1</span>
+          <img class="song__cover" src="../assets/artista/musica-1.png" alt="" width="50" height="50">
+          <div class="song__info">
+            <span class="song__name">Starboy</span>
+            <span class="song__artist">The Weeknd</span>
+          </div>
+          <span class="song__time">3:50</span>
+        </li>
+        <li class="song">
+          <span class="song__pos">2</span>
+          <img class="song__cover" src="../assets/artista/musica-2.png" alt="" width="50" height="50">
+          <div class="song__info">
+            <span class="song__name">One Of The Girls (with JENNIE, Lily Rose Depp)</span>
+            <span class="song__artist">The Weeknd</span>
+          </div>
+          <span class="song__time">4:04</span>
+        </li>
+        <li class="song">
+          <span class="song__pos">3</span>
+          <img class="song__cover" src="../assets/artista/musica-3.png" alt="" width="50" height="50">
+          <div class="song__info">
+            <span class="song__name">Blinding Lights</span>
+            <span class="song__artist">The Weeknd</span>
+          </div>
+          <span class="song__time">3:20</span>
+        </li>
+        <li class="song">
+          <span class="song__pos">4</span>
+          <img class="song__cover" src="../assets/artista/musica-4.png" alt="" width="50" height="50">
+          <div class="song__info">
+            <span class="song__name">Timeless (feat Playboi Carti)</span>
+            <span class="song__artist">The Weeknd</span>
+          </div>
+          <span class="song__time">4:16</span>
+        </li>
+        <li class="song">
+          <span class="song__pos">5</span>
+          <img class="song__cover" src="../assets/artista/musica-5.png" alt="" width="50" height="50">
+          <div class="song__info">
+            <span class="song__name">Die For You</span>
+            <span class="song__artist">The Weeknd</span>
+          </div>
+          <span class="song__time">4:20</span>
+        </li>
+      </ol>
+
+      <a class="card__more" href="#" id="ver-mais">Ver mais</a>
+    </section>
+
+  </main>
+
+</body>
+</html>

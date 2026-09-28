@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>good 4 u | MusicHub</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="../shared/componentes.css">
+  <link rel="stylesheet" href="musica.css">
+
+  <script src="../shared/componentes.js"></script>
+  <script src="../shared/cor-imagem.js" defer></script>
+</head>
+<body class="musica-page">
+
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <mh-header></mh-header>
+
+  <mh-sidebar ativo="home"></mh-sidebar>
+
+  <main class="musica">
+    <mh-album-3d class="musica__album" id="album-3d" src="../assets/musica/capa.png" alt="Capa do álbum" data-cor-dinamica></mh-album-3d>
+
+    <section class="letra" id="letra" aria-label="Letra da música">
+      <p class="letra__linha letra__linha--atual">Well, good for you,</p>
+      <p class="letra__linha">you look happy and healthy</p>
+      <p class="letra__linha">Not me, if you ever cared to ask</p>
+      <p class="letra__linha">Good for you, you're doing great out there without me, baby</p>
+      <p class="letra__linha">Like a damn sociopath</p>
+      <p class="letra__mais" aria-hidden="true">...</p>
+    </section>
+  </main>
+
+  <footer class="player" id="player">
+    <div class="player__musica">
+      <img class="player__capa" id="player-capa" src="../assets/musica/capa.png" alt="" width="50" height="50">
+      <div class="player__info">
+        <span class="player__titulo" id="player-titulo">good 4 u</span>
+        <span class="player__artista" id="player-artista">Olivia Rodrigo</span>
+      </div>
+      <button class="player__favoritar" type="button" id="btn-favoritar" aria-label="Favoritar" aria-pressed="false">
+        <img src="../assets/musica/icon-favoritar.svg" alt="" width="17" height="15">
+      </button>
+    </div>
+
+    <div class="player__centro">
+      <div class="player__controles">
+        <button class="player__botao" type="button" id="btn-aleatorio" aria-label="Aleatório" aria-pressed="false">
+          <img src="../assets/musica/icon-shuffle.svg" alt="" width="15" height="15">
+        </button>
+        <button class="player__botao" type="button" id="btn-anterior" aria-label="Anterior">
+          <img src="../assets/musica/icon-anterior.svg" alt="" width="15" height="14">
+        </button>
+        <button class="player__play" type="button" id="btn-play" aria-label="Tocar">
+          <img src="../assets/musica/icon-play.svg" alt="" width="40" height="40">
+        </button>
+        <button class="player__botao" type="button" id="btn-proxima" aria-label="Próxima">
+          <img src="../assets/musica/icon-proxima.svg" alt="" width="15" height="14">
+        </button>
+        <button class="player__botao" type="button" id="btn-repetir" aria-label="Repetir" aria-pressed="false">
+          <img src="../assets/musica/icon-repeat.svg" alt="" width="15" height="15">
+        </button>
+      </div>
+
+      <div class="player__tempo">
+        <span class="player__tempo-texto" id="tempo-atual">1:24</span>
+        <input class="barra player__progresso" type="range" id="progresso" min="0" max="165" value="84" aria-label="Posição da música">
+        <span class="player__tempo-texto" id="tempo-total">2:45</span>
+      </div>
+    </div>
+
+    <div class="player__volume">
+      <img class="player__volume-icone" src="../assets/musica/icon-volume.svg" alt="" width="16" height="16">
+      <input class="barra player__volume-barra" type="range" id="volume" min="0" max="100" value="85" aria-label="Volume">
+    </div>
+  </footer>
+
+</body>
+</html>

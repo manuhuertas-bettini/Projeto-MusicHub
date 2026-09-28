@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | MusicHub</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="login.css">
+</head>
+<body class="login-page">
+
+  <div class="login-bg" aria-hidden="true">
+    <img class="login-bg__pattern" src="../assets/login/bg-pattern.svg" alt="">
+    <div class="login-bg__overlay"></div>
+  </div>
+
+  <main class="login-card">
+    <header class="login-card__brand">
+      <img class="login-card__logo" src="../assets/logo-hub.svg" alt="" width="102" height="40">
+      <h1 class="login-card__title">MusicHub</h1>
+    </header>
+
+    <form class="login-form" id="login-form" novalidate>
+      <div class="field">
+        <label class="field__label" for="login-email">E-mail/usuário</label>
+        <input class="field__input" type="text" id="login-email" name="email"
+               placeholder="Ex.: exemple@gmail.com" autocomplete="username" required>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="login-senha">Senha</label>
+        <input class="field__input" type="password" id="login-senha" name="senha"
+               placeholder="Senha" autocomplete="current-password" required>
+      </div>
+
+      <a class="login-form__forgot" href="#" id="link-esqueci-senha">Esqueceu sua senha?</a>
+
+      <button class="btn-entrar" type="submit" id="btn-entrar">Entrar</button>
+    </form>
+
+    <span class="login-card__ou">ou</span>
+
+    <div class="social-login">
+      <button class="btn-social btn-social--google" type="button" id="btn-google">
+        <img class="btn-social__icon" src="../assets/login/icon-google.svg" alt="">
+        <span>Continuar com o Google</span>
+      </button>
+
+      <button class="btn-social btn-social--apple" type="button" id="btn-apple">
+        <img class="btn-social__icon" src="../assets/login/icon-apple.svg" alt="">
+        <span>Continuar com o Apple</span>
+      </button>
+
+      <button class="btn-social btn-social--facebook" type="button" id="btn-facebook">
+        <img class="btn-social__icon" src="../assets/login/icon-facebook.svg" alt="">
+        <span>Continuar com o Facebook</span>
+      </button>
+    </div>
+  </main>
+
+</body>
+</html>
