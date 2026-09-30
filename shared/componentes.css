@@ -78,8 +78,8 @@ mh-album-3d {
   z-index: 10;
   transform: translateY(-50%);
   width: 60px;
-  padding: 5px 5px 14px;
-  border-radius: 29px;
+  padding: 5px 5px 5px;
+  border-radius: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -91,7 +91,7 @@ mh-album-3d {
 
 .sidebar__item {
   width: 50px;
-  height: 73px;
+  height: 75px;
   border-radius: 24px;
   display: flex;
   align-items: center;
@@ -103,10 +103,14 @@ mh-album-3d {
   height: 80px;
   background: var(--sidebar-active, var(--glass-bg));
   box-shadow: var(--glass-edge);
+  transition: 0.2s;
 }
 
 .sidebar__item:not(.sidebar__item--active):hover {
-  background: rgba(255, 255, 255, 0.08);
+  transition: 0.2s;
+  height: 75px;
+  background: var(--sidebar-active, var(--glass-bg));
+  box-shadow: var(--glass-edge);
 }
 
 .sidebar__icon {
@@ -123,11 +127,31 @@ mh-album-3d {
   --tamanho: 500px;
   --espessura: 26px;
   --giro-x: -5deg;
-  --giro-y: 24deg;
+  --giro-y: 0deg;
   width: var(--tamanho);
   height: var(--tamanho);
   perspective: 1600px;
+  animation-name: float;
+  animation-duration: 7s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out; 
 }
+
+@keyframes float {
+  0% {
+    transform: translateY(0px) rotateY(5deg);
+  }
+  
+  50% {
+    transform: translateY(-5px) rotateY(-5deg);
+  }
+  
+  100% {
+    transform: translateY(0px) rotateY(5deg);
+  }
+}
+
+
 
 .album3d {
   scale: 0.9;
@@ -136,9 +160,8 @@ mh-album-3d {
   height: 100%;
   transform-style: preserve-3d;
   transform:
-    rotateX(calc(var(--giro-x) + var(--mouse-x, 0deg)))
-    rotateY(calc(var(--giro-y) + var(--mouse-y, 0deg)));
-  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    rotateX(calc(var(--giro-x) + var(--mouse-x, 0deg))) rotateY(calc(var(--giro-y) + var(--mouse-y, 0deg)));
+  transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .album3d__face {

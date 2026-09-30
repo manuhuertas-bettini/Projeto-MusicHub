@@ -48,16 +48,16 @@ body {
   position: absolute;
   left: 0;
   top: 0;
-  width: 998px;
+  width: 1000px;
   height: 813px;
   z-index: -1;
   background: radial-gradient(
-    571px 465.5px at 499px 406.5px,
-    var(--color-bg) 27.4%,
+    570px 465px at 500px 406px,
+    var(--color-bg) 25%,
     var(--color-accent-light) 100%
   );
-  -webkit-mask: url("../assets/artista/union.svg") top left / 998px 813px no-repeat;
-  mask: url("../assets/artista/union.svg") top left / 998px 813px no-repeat;
+  -webkit-mask: url("../assets/artista/union.svg") top left / 1000px 813px no-repeat;
+  mask: url("../assets/artista/union.svg") top left / 1000px 813px no-repeat;
 }
 
 .artist-banner {
@@ -80,7 +80,7 @@ body {
   position: absolute;
   left: 21px;
   top: 258px;
-  font-size: 48.3px;
+  font-size: 48px;
   font-weight: 900;
   line-height: normal;
 }
