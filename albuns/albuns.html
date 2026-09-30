@@ -5,51 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>good 4 u | MusicHub</title>
 
-    <link rel="stylesheet" href="albuns.css">
     <link rel="stylesheet" href="../global.css">
+    <link rel="stylesheet" href="albuns.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body data-page="home">
     <div class="page">
 
         <!-- BACKGROUND -->
         <div class="background" aria-hidden="true"></div>
 
-        <!-- HEADER -->
-        <!-- <header class="header">
-            <a href="#" class="logo" aria-label="MusicHub">
-                <img src="https://www.figma.com/api/mcp/asset/f0b8d656-bd40-4bd2-81c5-f24bb557f24d.svg" alt="MusicHub">
-            </a>
-
-            <label class="search">
-                <img
-                    src="https://www.figma.com/api/mcp/asset/72a38240-7554-4e24-b17d-558b06ba79f5.svg"
-                    alt=""
-                    class="search__icon"
-                >
-                <input type="search" placeholder="Search artists, tracks, playlists..." aria-label="Pesquisar">
-            </label>
-
-            <button class="profile-button" aria-label="Perfil"></button>
-        </header> -->
-
-        <!-- SIDEBAR
-        <aside class="sidebar" aria-label="Navegação">
-            <a class="sidebar__item sidebar__item--active" href="#" aria-label="Início">
-                <img src="https://www.figma.com/api/mcp/asset/48543cfd-1608-4a3d-a7c6-07bde01f5511.svg" alt="">
-            </a>
-
-            <a class="sidebar__item" href="#" aria-label="Biblioteca">
-                <img src="https://www.figma.com/api/mcp/asset/089ed8f0-eb65-4e7f-9594-486ecc16197d.svg" alt="">
-            </a>
-
-            <a class="sidebar__item" href="#" aria-label="Favoritos">
-                <img src="https://www.figma.com/api/mcp/asset/dc343c7d-dc19-4470-b5f9-65e58dbb05b4.svg" alt="">
-            </a>
-        </aside> -->
+        <!-- header, sidebar e player são injetados pelo ../global.js -->
 
         <!-- PLAYLIST -->
         <main class="playlist">
@@ -72,7 +41,9 @@
                     </p>
 
                     <div class="playlist-meta">
-                        <button class="user-avatar" aria-label="Usuário HUB"></button>
+                        <button class="user-avatar" aria-label="Usuário HUB">
+                            <img src="../imgs/login/icon-FTperfil.svg" alt="">
+                        </button>
                         <span>by user HUB</span>
                         <span class="meta-dot">•</span>
                         <span>42 songs, 2h 28m</span>
@@ -108,7 +79,7 @@
                     <span>ARTIST</span>
                     <span>ALBUM</span>
                     <span class="duration-header">
-                        <img src="https://www.figma.com/api/mcp/asset/3ae3e8e5-7226-445b-8f64-c6b5b3490958.svg" alt="">
+                        <img src="../imgs/relogio.svg" alt="">
                     </span>
                 </div>
 
@@ -206,83 +177,22 @@
                         <span>Olivia Rodrigo</span>
                         <span>SOUR</span>
                         <button class="favorite" aria-label="Favoritar the cure">
-                            <img src="https://www.figma.com/api/mcp/asset/28c4b1a7-6b96-4556-a1cf-ce10b714c092.svg" alt="">
+                            <img src="https://www.figma.com/api/mcp/asset/8ef1ab63-eb23-4aba-9071-96040314bdf6.svg" alt="">
                         </button>
                         <span>3:52</span>
                     </article>
                 </div>
             </section>
         </main>
-
-        <!-- PLAYER
-        <footer class="player">
-            <div class="player-song">
-                <img
-                    class="player-song__cover"
-                    src="https://www.figma.com/api/mcp/asset/05d97eeb-9963-4336-8396-47402a4f2e1c.png"
-                    alt=""
-                >
-
-                <div class="player-song__text">
-                    <strong>good 4 u</strong>
-                    <span>Olivia Rodrigo</span>
-                </div>
-
-                <button class="player-favorite" aria-label="Favoritar">
-                    <img src="https://www.figma.com/api/mcp/asset/8ef1ab63-eb23-4aba-9071-96040314bdf6.svg" alt="">
-                </button>
-            </div>
-
-            <div class="player-center">
-                <div class="player-controls">
-                    <button aria-label="Aleatório">
-                        <img src="https://www.figma.com/api/mcp/asset/64928dcb-8993-417b-a62b-fdc45a147aba.svg" alt="">
-                    </button>
-
-                    <button aria-label="Anterior" class="skip">
-                        <span></span>
-                    </button>
-
-                    <button class="player-play" id="playerPlay" aria-label="Reproduzir">
-                        <img src="https://www.figma.com/api/mcp/asset/e8db2165-5c65-4e95-9490-5fce8dbd93a3.svg" alt="">
-                    </button>
-
-                    <button aria-label="Próxima" class="skip skip--next">
-                        <span></span>
-                    </button>
-
-                    <button aria-label="Repetir">
-                        <img src="https://www.figma.com/api/mcp/asset/76ef5e4f-898e-42b4-8c82-b42aed070f7f.svg" alt="">
-                    </button>
-                </div>
-
-                <div class="player-progress">
-                    <span>1:24</span>
-                    <input type="range" min="0" max="165" value="84" aria-label="Progresso">
-                    <span>2:45</span>
-                </div>
-            </div>
-
-            <div class="player-volume">
-                <img src="https://www.figma.com/api/mcp/asset/c8e28b52-2335-4b02-9ce8-5d6277a9b103.svg" alt="">
-                <input type="range" min="0" max="100" value="85" aria-label="Volume">
-            </div>
-        </footer>
     </div>
-
+    <script src="albuns.js" defer></script>
+    <script src="../global.js" defer></script>
     <script>
-        const playButtons = [
-            document.querySelector("#mainPlay"),
-            document.querySelector("#playerPlay")
-        ];
-
-        playButtons.forEach(button => {
-            button?.addEventListener("click", () => {
-                button.classList.toggle("is-playing");
-            });
+        document.querySelector("#mainPlay")?.addEventListener("click", e => {
+            e.currentTarget.classList.toggle("is-playing");
         });
 
-        document.querySelectorAll(".favorite, .player-favorite").forEach(button => {
+        document.querySelectorAll(".favorite").forEach(button => {
             button.addEventListener("click", () => {
                 button.classList.toggle("is-favorite");
             });
@@ -295,6 +205,6 @@
                 ? "Following"
                 : "Follow";
         });
-    </script> -->
+    </script>
 </body>
 </html>

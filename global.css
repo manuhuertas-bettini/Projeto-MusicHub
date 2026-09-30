@@ -1,3 +1,9 @@
+/* =========================================================
+   MusicHub | global.css
+   Tokens + componentes globais (header, sidebar, player)
+   Fonte: Figma Style Guide | MusicHub (frame Playlist 345:809)
+========================================================= */
+
 @property --accent {
     syntax: "<color>";
     inherits: true;
@@ -12,11 +18,22 @@
     --muted: rgba(255,255,255,.72);
     --soft: rgba(255,255,255,.48);
 
-    --glass:
-        rgba(51,51,51,.40);
+    /* Vidro claro (igual ao .songs-card) */
+    --glass: #ffffff18;
+    --glass-blur: 50px;
 
-    --glass-shadow:
-        inset 1px 1px 5px -1px white;
+    --glass-shadow: inset 1px 1px 5px -1px white;
+
+    /* Sombra completa do vidro, igual ao Figma (bordas + brilho interno) */
+    --glass-shadow-full:
+        inset 1px 1px 0 -0.5px #333,
+        inset -1px -1px 0 -0.5px #262626,
+        inset 1px 1px 0.5px -1px #fff,
+        inset -1px -1px 0.5px -1px #fff,
+        inset 0 0 3px 0 rgba(255,255,255,.5),
+        inset 0 0 11px 0 #f2f2f2;
+
+    --gutter: 120px;      /* margem lateral do header e do player no desktop */
 
     --font:
         "SF Pro",
@@ -26,4 +43,378 @@
         "Inter",
         "Segoe UI",
         sans-serif;
+}
+
+/* ---------- Superfície de vidro reutilizável ---------- */
+.glass {
+    background: var(--glass);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    box-shadow: var(--glass-shadow-full);
+}
+
+/* =========================================================
+   HEADER  (Figma: logo 102x40 | search 500x40 | perfil 40x40)
+========================================================= */
+.header {
+    position: relative;
+    z-index: 3;
+    width: min(1200px, 100%);
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 102px minmax(200px, 500px) 40px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+.header__logo {
+    display: block;
+    width: 102px;
+    height: 40px;
+}
+
+.header__logo img {
+    width: 102px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.header__search {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    justify-self: center;
+
+    display: flex;
+    align-items: center;
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.header__search-icon {
+    width: 16px;
+    height: 16px;
+    margin-left: 14px;
+    flex: 0 0 auto;
+}
+
+.header__search input {
+    width: 100%;
+    height: 100%;
+    padding: 0 18px 0 13px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: var(--white);
+    font-size: 12px;
+}
+
+.header__search input::placeholder { color: rgba(255,255,255,.55); }
+.header__search:focus-within { outline: 1px solid rgba(255,255,255,.55); }
+
+.header__profile {
+    width: 40px;
+    height: 40px;
+    justify-self: end;
+    border-radius: 24px;
+    overflow: hidden;
+    transition: transform .2s ease;
+}
+
+.header__profile:hover { transform: scale(1.06); }
+.header__profile img { width: 100%; height: 100%; object-fit: cover; }
+
+/* =========================================================
+   SIDEBAR  (Figma: 60x245, raio 29, itens 50x50)
+========================================================= */
+.sidebar {
+    position: fixed;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 4;
+
+    width: 60px;
+    height: 245px;
+    padding: 5px 5px 14px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    border-radius: 29px;
+}
+
+.sidebar__item {
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-items: center;
+    border-radius: 24px;
+    transition: background .2s ease, transform .2s ease;
+}
+
+.sidebar__item img {
+    width: 27px;
+    height: 29px;
+    object-fit: contain;
+}
+
+.sidebar__item:hover {
+    background: rgba(255,255,255,.1);
+    transform: scale(1.04);
+}
+
+/* item ativo = pílula de vidro (frame 372:318) */
+.sidebar__item--active,
+.sidebar__item[aria-current="page"] {
+    background: rgba(255,255,255,.18);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    box-shadow: var(--glass-shadow-full);
+}
+
+/* =========================================================
+   PLAYER / BARRA DE SOM  (Figma: 1200x90, raio 24)
+========================================================= */
+.player {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%);
+    z-index: 5;
+
+    width: min(1200px, calc(100% - (var(--gutter) * 2)));
+    height: 90px;
+    padding: 0 20px;
+
+    display: grid;
+    grid-template-columns: minmax(200px, 1fr) minmax(300px, 560px) minmax(128px, 1fr);
+    align-items: center;
+    gap: 20px;
+
+    border-radius: 24px;
+}
+
+.player__song {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.player__cover {
+    width: 50px;
+    height: 50px;
+    flex: 0 0 50px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.player__text {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.player__title {
+    font-size: 15px;
+    font-weight: 590;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player__artist {
+    font-size: 12px;
+    opacity: .5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player__favorite {
+    width: 17px;
+    height: 15px;
+    flex: 0 0 17px;
+    margin-left: 6px;
+    transition: transform .2s ease;
+}
+
+.player__favorite img { width: 17px; height: 15px; }
+.player__favorite.is-favorite { transform: scale(1.2); filter: drop-shadow(0 0 4px rgba(255,255,255,.7)); }
+
+.player__center {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.player__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+}
+
+.player__controls button {
+    width: 22px;
+    height: 22px;
+    display: grid;
+    place-items: center;
+    opacity: .95;
+    transition: transform .2s ease, opacity .2s ease;
+}
+
+.player__controls button:hover { transform: scale(1.12); opacity: 1; }
+.player__controls img { width: 16px; height: 16px; max-width: none; }
+.player__skip img { width: 13px; height: 12px; }
+.player__skip--next img { transform: scaleX(-1); width: 13px; height: 12px; }
+
+.player__play {
+    position: relative;
+    width: 40px !important;
+    height: 40px !important;
+}
+
+.player__play img { width: 40px; height: 40px; }
+
+/* estado "tocando": cobre o ícone de play com o de pause em CSS */
+.player__play::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 12px;
+    height: 14px;
+    border-left: 4px solid var(--violet-darker);
+    border-right: 4px solid var(--violet-darker);
+    background: transparent;
+    border-radius: 1px;
+    opacity: 0;
+    transition: opacity .15s ease;
+}
+
+.player__play.is-playing::after { opacity: 1; }
+.player__play.is-playing { background: #f5f1f5; border-radius: 50%; }
+.player__play.is-playing img { opacity: 0; }
+
+.player__progress {
+    display: grid;
+    grid-template-columns: 34px 1fr 34px;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+}
+
+.player__progress span:first-child { text-align: right; }
+
+.player__volume {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 128px;
+}
+
+.player__volume svg { width: 16px; height: 16px; flex: 0 0 16px; }
+
+/* ---------- Sliders (tempo e volume) ---------- */
+.player input[type="range"] {
+    --val: 50%;
+    width: 100%;
+    height: 3px;
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+    background: linear-gradient(to right, #fff var(--val), rgba(255,255,255,.4) var(--val));
+}
+
+.player input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 4px rgba(0,0,0,.25);
+}
+
+.player input[type="range"]::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    border: 0;
+    border-radius: 50%;
+    background: #fff;
+}
+
+/* acessibilidade */
+.header button:focus-visible,
+.sidebar a:focus-visible,
+.player button:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+@media (max-width: 1250px) {
+    :root { --gutter: 110px; }
+}
+
+@media (max-width: 1050px) {
+    :root { --gutter: 90px; }
+    .player { grid-template-columns: minmax(180px, 1fr) minmax(260px, 1.4fr); }
+    .player__volume { display: none; }
+}
+
+@media (max-width: 760px) {
+    .header {
+        grid-template-columns: 102px 40px;
+        gap: 12px;
+    }
+
+    .header__search {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        margin-top: 8px;
+    }
+
+    /* sidebar vira barra horizontal acima do player */
+    .sidebar {
+        left: 50%;
+        top: auto;
+        bottom: 152px;
+        transform: translateX(-50%);
+        width: min(270px, calc(100% - 40px));
+        height: 60px;
+        padding: 5px 14px;
+        flex-direction: row;
+        border-radius: 29px;
+    }
+
+    .player {
+        --gutter: 10px;
+        bottom: 10px;
+        height: 132px;
+        padding: 10px 14px;
+        grid-template-columns: 1fr;
+        gap: 6px;
+        border-radius: 20px;
+    }
+
+    .player__song { height: 50px; }
+    .player__controls { gap: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .header *, .sidebar *, .player * { transition: none !important; }
 }
