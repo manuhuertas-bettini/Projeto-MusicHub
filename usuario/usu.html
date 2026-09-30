@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuário</title>
+    <link rel="stylesheet" href="../usuario/usu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    <section class="menu-lateral">
+        <article class="info">
+            <div class="foto">
+                <img src="../imgs/login/icon-FTperfil.svg" alt="" id="fotoPerfil">
+                <p class="nome">Usuário</p>
+                <p class="pacote">Premium</p>
+            </div>
+
+            <nav class="opcoes">
+                <a href="#" class="item-menu"><i class="fa-regular fa-circle-user"></i> Conta</a>
+                <a href="#" class="item-menu"><i class="fa-solid fa-gear"></i> Configurações</a>
+                <a href="#" class="item-menu"><i class="fa-solid fa-circle-info"></i> Informações</a>
+                <a href="#" class="item-menu"><i class="fa-regular fa-credit-card"></i> Pagamentos</a>
+                <a href="#" class="item-menu"><i class="fa-solid fa-globe"></i> Localização</a>
+                <a href="#" class="item-menu"><i class="fa-solid fa-question"></i> Preciso de ajuda</a>
+            </nav>
+
+        <a href="../home/home.html">
+            <button class="sair"><i class="fa-solid fa-right-from-bracket"></i> Sair</button>
+        </a>
+        </article>
+    </section>
+
+    <section class="forms">
+        <article class="info-pessoais">
+            <h1>Informações Pessoais</h1>
+    
+            <form action="" class="cadastro">
+    
+                <div class="nome">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome">
+                </div>
+    
+                <div class="sobrenome">
+                    <label for="sobrenome">Sobrenome</label>
+                    <input type="text" id="sobrenome">
+                </div>
+    
+                <div class="email">
+                    <label for="email">Email</label>
+                    <input type="text" id="email">
+                </div>
+    
+                <div class="senha">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha">
+                </div>
+    
+                <div class="telefone">
+                    <label for="input-telefone">Telefone</label>
+                    <div class="phone-container">
+                        <button type="button" class="country-select">
+                            <span class="flag-icon">🇧🇷</span>
+                            <i class="fa-solid fa-chevron-down arrow-icon"></i>
+                        </button>
+                        <span class="ddi-prefix">(+55)</span>
+                        <input type="tel" id="input-telefone" placeholder="---------">
+                    </div>
+                </div>
+    
+                <div class="data">
+                    <label for="data">Data de Nascimento</label>
+                    <input type="date" id="data">
+                </div>
+            </form>
+    
+            <div class="botoes-container">
+                <button class="salvar">Salvar</button>
+                <button class="Excluir">Excluir</button>
+            </div>
+    
+        </article>
+    </section>
+
+    <script src="../usuario/usuario.js"></script>
+</body>
+
+</html>
