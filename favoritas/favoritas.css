@@ -1,0 +1,721 @@
+/* MusicHub — Músicas favoritas
+   Usa do global.css: o reset e as variáveis --colorWhite, --colorBlack,
+   --colorTextSoft, --colorTextMuted, --glassBg, --glassBlur, --glassEdge e --radiusCard */
+
+body {
+  padding-bottom: 150px; /* espaço para o player fixo não cobrir a lista */
+}
+
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(#000 0%, #0d0409 30%, #240915 65%, #3a0a1d 100%);
+}
+
+.sprite {
+  display: none;
+}
+
+/* ---------- Estilos repetidos em várias partes ---------- */
+
+/* efeito de vidro */
+.search,
+.sidebar,
+.sidebar__item--active,
+.topbar__avatar,
+.btn-circle,
+.btn-download,
+.tracks,
+.player {
+  background: var(--glassBg);
+  box-shadow: var(--glassEdge);
+}
+
+.search,
+.sidebar,
+.tracks,
+.player {
+  backdrop-filter: var(--glassBlur);
+  -webkit-backdrop-filter: var(--glassBlur);
+}
+
+/* conteúdo centralizado dentro do elemento */
+.sidebar__item,
+.btn-play-pill,
+.btn-circle,
+.track__like,
+.track__time,
+.player__btn,
+.player__play {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* texto grande demais termina em "..." */
+.track__name,
+.track__artist,
+.track__album,
+.player__name,
+.player__artist {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topbar,
+.favorites,
+.player {
+  width: min(1200px, calc(100% - 32px));
+}
+
+/* ---------- Topo ---------- */
+
+.topbar {
+  margin: 30px auto 0;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* busca sempre no centro */
+  align-items: center;
+}
+
+.topbar__logo img {
+  width: 102px;
+  height: 40px;
+}
+
+.search {
+  position: relative;
+  width: min(500px, 42vw);
+  height: 40px;
+  border-radius: 24px;
+}
+
+.search__icon {
+  position: absolute;
+  left: 20px;
+  top: 12px;
+  width: 16px;
+}
+
+.search__input {
+  width: 100%;
+  height: 100%;
+  padding: 0 20px 0 60px;
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 12px;
+}
+
+.search__input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.topbar__avatar {
+  justify-self: end;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.topbar__avatar img,
+.playlist-info__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ---------- Menu lateral ---------- */
+
+.sidebar {
+  position: fixed;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 5px 14px;
+  border-radius: 29px;
+}
+
+.sidebar__item {
+  width: 50px;
+  height: 73px;
+  border-radius: 24px;
+}
+
+.sidebar__item--active {
+  height: 80px;
+}
+
+.sidebar__icon {
+  width: 30px;
+  height: 27px;
+}
+
+.sidebar__icon--home {
+  width: 28px;
+  height: 30px;
+}
+
+/* ---------- Cabeçalho da playlist ---------- */
+
+.favorites {
+  margin: 65px auto 0;
+  padding-left: 146px; /* alinha com o Figma e deixa espaço para o menu lateral */
+}
+
+.playlist-header {
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  align-items: start;
+  column-gap: 20px;
+}
+
+.playlist-cover {
+  aspect-ratio: 1; /* sempre quadrada, do tamanho da coluna */
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  background: linear-gradient(#ec98bd, #b27392 30%, #6c4052 62%, #000 96%);
+}
+
+.playlist-cover img {
+  width: 160px;
+}
+
+.playlist-info {
+  padding-top: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.playlist-info__type {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: var(--colorTextSoft);
+}
+
+.playlist-info__title {
+  margin-top: 23px;
+  font-size: 36px;
+  line-height: 1.2;
+}
+
+.playlist-info__desc {
+  margin-top: 20px;
+  max-width: 310px;
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.playlist-info__meta {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 15px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.playlist-info__dot {
+  font-size: 10px;
+}
+
+.playlist-info__count {
+  color: var(--colorTextSoft);
+}
+
+.playlist-actions {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.btn-play-pill {
+  width: 126px;
+  height: 42px;
+  margin-right: 26px;
+  gap: 8px;
+  border-radius: 21px;
+  background: var(--colorWhite);
+  color: var(--colorBlack);
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.btn-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.btn-download {
+  height: 40px;
+  margin: 0 44px 0 auto; /* "auto" empurra o botão para a direita */
+  padding: 0 25px;
+  border-radius: 20px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.btn-circle:hover,
+.btn-download:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+/* ---------- Lista de músicas ---------- */
+
+.tracks {
+  /* colunas: # | título | artista | álbum | coração | tempo */
+  --cols: 90px minmax(0, 288fr) minmax(0, 257fr) minmax(0, 217fr) 16px 162px;
+  margin-top: 28px;
+  padding: 28px 12px 14px;
+  border-radius: var(--radiusCard);
+}
+
+/* cabeçalho e músicas usam as mesmas colunas, por isso ficam alinhados */
+.track-grid {
+  display: grid;
+  grid-template-columns: var(--cols);
+  align-items: center;
+}
+
+.tracks__head {
+  height: 26px;
+  text-transform: uppercase;
+}
+
+.tracks__list {
+  margin-top: 5px;
+  max-height: 322px; /* 7 músicas; o resto rola dentro do card */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  list-style: none;
+}
+
+.track {
+  height: 46px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.track:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.track__pos {
+  width: 20px;
+  margin-left: 25px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.track__title {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 23px;
+}
+
+.track__cover {
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.track__name,
+.track__artist,
+.track__album {
+  padding-right: 16px;
+}
+
+.track__time {
+  width: 36px;
+  margin-left: 46px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Player ---------- */
+
+.player {
+  position: fixed;
+  left: 50%;
+  bottom: 26px;
+  transform: translateX(-50%);
+  z-index: 10;
+  height: 90px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  border-radius: var(--radiusCard);
+  background: rgba(58, 18, 36, 0.55);
+}
+
+.player__track {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.player__cover {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.player__info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.player__name {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.player__artist {
+  font-size: 12px;
+  color: var(--colorTextMuted);
+}
+
+.player__like {
+  margin-left: 8px;
+}
+
+.player__center {
+  align-self: start;
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.player__controls,
+.player__progress,
+.player__volume {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.player__controls {
+  gap: 16px;
+}
+
+.player__btn {
+  width: 20px;
+  height: 20px;
+}
+
+.player__play {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--colorWhite);
+  color: var(--colorBlack);
+}
+
+.player__time {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.player__volume {
+  justify-self: end;
+}
+
+/* barra de progresso e de volume: a largura do preenchimento vem do HTML */
+.bar {
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.bar__fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--colorWhite);
+}
+
+.bar--progress {
+  width: min(500px, 36vw);
+}
+
+.bar--volume {
+  width: 100px;
+}
+
+/* ---------- Até 1024px: tablet ---------- */
+
+@media (max-width: 1024px) {
+  .favorites {
+    padding-left: 100px;
+  }
+
+  .playlist-header {
+    grid-template-columns: 220px 1fr;
+  }
+
+  .playlist-cover img {
+    width: 120px;
+  }
+
+  .playlist-info {
+    padding-top: 12px;
+  }
+
+  .playlist-info__title {
+    margin-top: 14px;
+    font-size: 32px;
+  }
+
+  .playlist-info__desc {
+    margin-top: 12px;
+    font-size: 16px;
+  }
+
+  .playlist-actions {
+    gap: 16px;
+  }
+
+  .btn-play-pill {
+    margin-right: 8px;
+  }
+
+  .btn-download {
+    margin-right: 0;
+  }
+
+  .tracks {
+    --cols: 40px minmax(0, 1.4fr) minmax(0, 1fr) 16px 70px; /* sem a coluna do álbum */
+  }
+
+  .tracks__list {
+    max-height: none; /* rolagem dentro de rolagem atrapalha no toque */
+  }
+
+  .track__album {
+    display: none;
+  }
+
+  .track__pos,
+  .track__time {
+    margin: 0 auto;
+  }
+}
+
+/* ---------- Até 768px: celular ---------- */
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 170px;
+  }
+
+  .topbar {
+    margin-top: 20px;
+    grid-template-columns: 1fr auto;
+    row-gap: 16px;
+  }
+
+  .search {
+    grid-column: 1 / -1; /* busca desce para a segunda linha e ocupa tudo */
+    grid-row: 2;
+    width: 100%;
+  }
+
+  .search__input {
+    padding-left: 48px;
+    font-size: 16px; /* abaixo de 16px o iPhone dá zoom ao tocar no campo */
+  }
+
+  /* o menu lateral vira uma barra embaixo da tela */
+  .sidebar {
+    top: auto;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: row;
+    gap: 4px;
+    padding: 5px;
+  }
+
+  .sidebar__item {
+    width: 64px;
+    height: 48px;
+  }
+
+  .sidebar__icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .favorites {
+    margin-top: 28px;
+    padding-left: 0;
+  }
+
+  .playlist-header {
+    grid-template-columns: 1fr;
+    row-gap: 20px;
+  }
+
+  .playlist-cover {
+    width: 200px;
+    justify-self: center;
+  }
+
+  .playlist-cover img {
+    width: 110px;
+  }
+
+  .playlist-info {
+    padding-top: 0;
+  }
+
+  .playlist-info__title {
+    margin-top: 8px;
+    font-size: 28px;
+  }
+
+  .playlist-info__desc {
+    max-width: none;
+  }
+
+  .playlist-info__meta {
+    column-gap: 10px;
+    font-size: 14px;
+  }
+
+  .playlist-actions {
+    gap: 12px;
+  }
+
+  .btn-play-pill {
+    width: 110px;
+    height: 40px;
+    margin-right: 4px;
+    font-size: 18px;
+  }
+
+  .btn-download {
+    padding: 0 18px;
+    font-size: 16px;
+  }
+
+  /* lista sem cabeçalho, com o artista embaixo do nome */
+  .tracks {
+    margin-top: 24px;
+    padding: 8px;
+  }
+
+  .tracks__head {
+    display: none;
+  }
+
+  .track {
+    height: 60px;
+    padding: 0 6px;
+    column-gap: 10px;
+    grid-template-columns: 22px 44px minmax(0, 1fr) 24px 40px;
+    grid-template-areas:
+      "pos cover name   like time"
+      "pos cover artist like time";
+  }
+
+  .track__title {
+    display: contents; /* capa e nome passam a ser itens da grade da linha */
+  }
+
+  .track__pos    { grid-area: pos; font-size: 14px; }
+  .track__cover  { grid-area: cover; width: 44px; height: 44px; }
+  .track__name   { grid-area: name; align-self: end; padding: 0; font-size: 14px; }
+  .track__artist { grid-area: artist; align-self: start; padding: 0; font-size: 12px; color: var(--colorTextMuted); }
+  .track__like   { grid-area: like; }
+  .track__time   { grid-area: time; }
+
+  /* player compacto, logo acima da barra do menu */
+  .player {
+    bottom: 80px;
+    height: 64px;
+    padding: 0 12px;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .player__cover {
+    width: 44px;
+    height: 44px;
+  }
+
+  .player__center {
+    align-self: center;
+    padding-top: 0;
+  }
+
+  /* some: aleatório (primeiro botão), repetir (último), tempos e volume */
+  .player__btn:first-child,
+  .player__btn:last-child,
+  .player__time,
+  .player__volume {
+    display: none;
+  }
+
+  .player__play {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* a barra de progresso vira uma linha fina no pé do player */
+  .player__progress {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 5px;
+  }
+
+  .bar--progress {
+    width: 100%;
+    height: 2px;
+  }
+}
+
+/* ---------- Até 420px: celular pequeno ---------- */
+
+@media (max-width: 420px) {
+  .playlist-cover {
+    width: 160px;
+  }
+
+  .playlist-cover img {
+    width: 90px;
+  }
+
+  .playlist-info__title {
+    font-size: 24px;
+  }
+
+  .btn-play-pill {
+    width: 96px;
+    font-size: 16px;
+  }
+
+  .btn-download {
+    padding: 0 14px;
+    font-size: 15px;
+  }
+}

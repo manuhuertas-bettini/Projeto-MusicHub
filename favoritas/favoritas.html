@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Músicas favoritas | MusicHub</title>
+
+  <!-- fonte Inter (usada quando o computador não tem a SF Pro) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../global.css">
+  <link rel="stylesheet" href="favorites.css">
+
+</head>
+<body>
+
+  <!-- ícones da página: cada um é desenhado aqui uma vez e usado depois com <use href="#nome"> -->
+  <svg class="sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-heart" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.9 4.5 6.6 4.1c2.1-.2 4 .9 5.4 2.7 1.4-1.8 3.3-2.9 5.4-2.7 3.7.4 5.7 4.3 4.2 7.7C19.5 16.4 12 21 12 21z"/>
+    </symbol>
+    <symbol id="i-play" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7 4.8v14.4a1 1 0 0 0 1.5.86l11.4-7.2a1 1 0 0 0 0-1.72L8.5 3.94A1 1 0 0 0 7 4.8z"/>
+    </symbol>
+    <symbol id="i-shuffle" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>
+    </symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M5 7h14M5 12h14M5 17h14"/>
+    </symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 7v5l3 2"/>
+      </g>
+    </symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M19 5.6v12.8a.9.9 0 0 1-1.4.75l-9.6-6.4a.9.9 0 0 1 0-1.5l9.6-6.4a.9.9 0 0 1 1.4.75z"/>
+      <rect fill="currentColor" x="4.6" y="5" width="2.4" height="14" rx="1.2"/>
+    </symbol>
+    <symbol id="i-next" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M5 5.6v12.8a.9.9 0 0 0 1.4.75l9.6-6.4a.9.9 0 0 0 0-1.5L6.4 4.85A.9.9 0 0 0 5 5.6z"/>
+      <rect fill="currentColor" x="17" y="5" width="2.4" height="14" rx="1.2"/>
+    </symbol>
+    <symbol id="i-repeat" viewBox="0 0 24 24">
+      <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M17 2l4 4-4 4M3 11v-1a4 4 0 0 1 4-4h14M7 22l-4-4 4-4M21 13v1a4 4 0 0 1-4 4H3"/>
+    </symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M3 9.5h4l5-4.2v13.4l-5-4.2H3z"/>
+      <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M15.5 9a4.2 4.2 0 0 1 0 6M18.5 6.2a8 8 0 0 1 0 11.6"/>
+    </symbol>
+  </svg>
+
+  <div class="page-bg"></div>
+
+  <!-- topo -->
+  <header class="topbar">
+    <a class="topbar__logo" href="#">
+      <img src="/imgs/login/logo-hub.svg" alt="MusicHub">
+    </a>
+
+    <form class="search" role="search">
+      <img class="search__icon" src="../assets/artista/icon-search.svg" alt="">
+      <input class="search__input" type="search" name="q" placeholder="Buscar artistas, músicas, playlists..." aria-label="Buscar">
+    </form>
+
+    <button class="topbar__avatar" type="button" aria-label="Perfil">
+      <img src="/imgs/login/icon-FTperfil.svg" alt="">
+    </button>
+  </header>
+
+  <!-- menu lateral -->
+  <nav class="sidebar">
+    <a class="sidebar__item" href="#" aria-label="Início">
+      <img class="sidebar__icon sidebar__icon--home" src="/imgs/musica/icon-home.png" alt="">
+    </a>
+    <a class="sidebar__item" href="#" aria-label="Biblioteca">
+      <img class="sidebar__icon" src="/imgs/musica/icon-biblioteca.png" alt="">
+    </a>
+    <a class="sidebar__item sidebar__item--active" href="#" aria-label="Favoritos">
+      <img class="sidebar__icon" src="/imgs/musica/icon-favoritar.svg" alt="">
+    </a>
+  </nav>
+
+  <main class="favorites">
+
+    <!-- capa e informações da playlist -->
+    <section class="playlist-header">
+      <div class="playlist-cover">
+        <img src="/imgs/login/logo-hub.svg" alt="">
+      </div>
+
+      <div class="playlist-info">
+        <span class="playlist-info__type">Playlist privada</span>
+        <h1 class="playlist-info__title">Músicas favoritas</h1>
+        <p class="playlist-info__desc">Seu espaço particular onde você pode ouvir seus sucessos favoritos.</p>
+
+        <div class="playlist-info__meta">
+          <img class="playlist-info__avatar" src="/imgs/login/icon-FTperfil.svg" alt="">
+          <span class="playlist-info__owner">Feito por: User HUB</span>
+          <span class="playlist-info__dot">•</span>
+          <span class="playlist-info__count">56 músicas, 3h 10min</span>
+        </div>
+
+        <div class="playlist-actions">
+          <button class="btn-play-pill" type="button">
+            <svg width="18" height="18"><use href="#i-play"></use></svg>
+            Play
+          </button>
+          <button class="btn-circle" type="button" aria-label="Tocar aleatório">
+            <svg width="18" height="18"><use href="#i-shuffle"></use></svg>
+          </button>
+          <button class="btn-circle" type="button" aria-label="Mais opções">
+            <svg width="18" height="18"><use href="#i-menu"></use></svg>
+          </button>
+          <button class="btn-download" type="button">Download</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- lista de músicas -->
+    <section class="tracks">
+      <div class="tracks__head track-grid">
+        <span class="track__pos">#</span>
+        <span>Título</span>
+        <span>Artista</span>
+        <span class="track__album">Álbum</span>
+        <span></span> <!-- coluna do coração -->
+        <span class="track__time">
+          <svg width="22" height="22" aria-label="Duração"><use href="#i-clock"></use></svg>
+        </span>
+      </div>
+
+      <ol class="tracks__list">
+        <li class="track track-grid">
+          <span class="track__pos">1</span>
+          <div class="track__title">
+            <img class="track__cover" src="/imgs/musica/Fever.svg" alt="">
+            <span class="track__name">Fever</span>
+          </div>
+          <span class="track__artist">Fakemink</span>
+          <span class="track__album">Fever</span>
+          <button class="track__like" type="button" aria-label="Remover dos favoritos">
+            <svg width="16" height="16"><use href="#i-heart"></use></svg>
+          </button>
+          <span class="track__time">2:24</span>
+        </li>
+
+        <li class="track track-grid">
+          <span class="track__pos">2</span>
+          <div class="track__title">
+            <img class="track__cover" src="/imgs/musica/good4u.svg" alt="">
+            <span class="track__name">drivers license</span>
+          </div>
+          <span class="track__artist">Olivia Rodrigo</span>
+          <span class="track__album">SOUR</span>
+          <button class="track__like" type="button" aria-label="Remover dos favoritos">
+            <svg width="16" height="16"><use href="#i-heart"></use></svg>
+          </button>
+          <span class="track__time">3:49</span>
+        </li>
+
+        <li class="track track-grid">
+          <span class="track__pos">3</span>
+          <div class="track__title">
+            <img class="track__cover" src="/imgs/musica/auto.svg" alt="">
+            <span class="track__name">Automotivo Místico 2</span>
+          </div>
+          <span class="track__artist">DJ Blakes, Mc Nauan, Love Funk</span>
+          <span class="track__album">Automotivo Místico 2</span>
+          <button class="track__like" type="button" aria-label="Remover dos favoritos">
+            <svg width="16" height="16"><use href="#i-heart"></use></svg>
+          </button>
+          <span class="track__time">2:57</span>
+        </li>
+
+        <li class="track track-grid">
+          <span class="track__pos">4</span>
+          <div class="track__title">
+            <img class="track__cover" src="/imgs/musica/graduation.svg" alt="">
+            <span class="track__name">Flashing Lights</span>
+          </div>
+          <span class="track__artist">Kanye West, Dwele</span>
+          <span class="track__album">Graduation</span>
+          <button class="track__like" type="button" aria-label="Remover dos favoritos">
+            <svg width="16" height="16"><use href="#i-heart"></use></svg>
+          </button>
+          <span class="track__time">3:56</span>
+        </li>
+
+        <li class="track track-grid">
+          <span class="track__pos">5</span>
+          <div class="track__title">
+            <img class="track__cover" src="/imgs/home/eminem.jpg" alt="">
+            <span class="track__name">Superman</span>
+          </div>
+          <span class="track__artist">Eminem, Dina Rae</span>
+          <span class="track__album">The Eminem Show</span>
+          <button class="track__like" type="button" aria-label="Remover dos favoritos">
+            <svg width="16" height="16"><use href="#i-heart"></use></svg>
+          </button>
+          <span class="track__time">5:49</span>
+        </li>
+
+        <li class="track track-grid">
+          <span class="track__pos">6</span>
+          <div class="track__title">
+            <img class="track__cover" src="/imgs/musica/here.svg" alt="">
+            <span class="track__name">Here Comes The Sun - Remastered</span>
+          </div>
+          <span class="track__artist">The Beatles</span>
+          <span class="track__album">Abbey Road (Remastered)</span>
+          <button class="track__like" type="button" aria-label="Remover dos favoritos">
+            <svg width="16" height="16"><use href="#i-heart"></use></svg>
+          </button>
+          <span class="track__time">3:05</span>
+        </li>
+
+        <li class="track track-grid">
+          <span class="track__pos">7</span>
+          <div class="track__title">
+            <img class="track__cover" src="/imgs/musica/hills.svg" alt="">
+            <span class="track__name">Run to the Hills</span>
+          </div>
+          <span class="track__artist">Iron Maiden</span>
+          <span class="track__album">The Number of the Beast</span>
+          <button class="track__like" type="button" aria-label="Remover dos favoritos">
+            <svg width="16" height="16"><use href="#i-heart"></use></svg>
+          </button>
+          <span class="track__time">3:52</span>
+        </li>
+      </ol>
+    </section>
+
+  </main>
+
+  <!-- player fixo no rodapé -->
+  <footer class="player">
+    <div class="player__track">
+      <img class="player__cover" src="../assets/favoritos/capa-good-4-u.png" alt="">
+      <div class="player__info">
+        <span class="player__name">good 4 u</span>
+        <span class="player__artist">Olivia Rodrigo</span>
+      </div>
+      <button class="player__like" type="button" aria-label="Remover dos favoritos">
+        <svg width="16" height="16"><use href="#i-heart"></use></svg>
+      </button>
+    </div>
+
+    <div class="player__center">
+      <div class="player__controls">
+        <button class="player__btn" type="button" aria-label="Aleatório">
+          <svg width="18" height="18"><use href="#i-shuffle"></use></svg>
+        </button>
+        <button class="player__btn" type="button" aria-label="Anterior">
+          <svg width="18" height="18"><use href="#i-prev"></use></svg>
+        </button>
+        <button class="player__play" type="button" aria-label="Tocar">
+          <svg width="18" height="18"><use href="#i-play"></use></svg>
+        </button>
+        <button class="player__btn" type="button" aria-label="Próxima">
+          <svg width="18" height="18"><use href="#i-next"></use></svg>
+        </button>
+        <button class="player__btn" type="button" aria-label="Repetir">
+          <svg width="18" height="18"><use href="#i-repeat"></use></svg>
+        </button>
+      </div>
+
+      <!-- a largura do preenchimento é quanto da música já tocou: 1:24 de 2:45 ≈ 51% -->
+      <div class="player__progress">
+        <span class="player__time">1:24</span>
+        <div class="bar bar--progress"><span class="bar__fill" style="width: 51%;"></span></div>
+        <span class="player__time">2:45</span>
+      </div>
+    </div>
+
+    <div class="player__volume">
+      <svg width="20" height="20"><use href="#i-volume"></use></svg>
+      <div class="bar bar--volume"><span class="bar__fill" style="width: 80%;"></span></div>
+    </div>
+  </footer>
+
+</body>
+</html>
